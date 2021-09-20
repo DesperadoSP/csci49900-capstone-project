@@ -13,7 +13,9 @@ class Navigation extends Component {
             <button className = {"navTabs"}> Products </button>
             <button className = {"navTabs"}> About </button>
           </div>
-          <SearchBar className = {"searchBar"}></SearchBar>
+          <div className = {"searchBar"}>
+            <SearchBar ></SearchBar>
+          </div>
         </div>
           
           
