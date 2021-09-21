@@ -1,0 +1,37 @@
+.container {
+    font-size: 17px;
+}
+
+.aboutTitle {
+    text-align: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.aboutContent {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.whoTitle {
+    text-align: center;
+    margin-top: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.whoContent {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.peopleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.people {
+    max-width: 100%;
+    height: auto;
+    margin-top: 100px;
+    margin-left: 50px;
+}
