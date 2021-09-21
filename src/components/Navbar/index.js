@@ -1,13 +1,24 @@
 import React from 'react';
+import background from './bg.gif';
 import { Nav, NavLink, NavMenu} from './NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
   
 const Navbar = () => {
   return (
     <>
-      <div className="navBar">
-      <Nav>
-        <h3 id="logo"> TradeBreath <br/>(Logo Pending) </h3>
+      <div className="navBar-div">
+
+      <Nav id ="navBar"
+        style={{ 
+          backgroundImage: `url(${background})`,
+          backgroundCover: `cover`,
+          height: '90px',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '1920px 110px',
+          backgroundColor: '#000'
+        }}
+      >
+          <h3 id="logo"> TradeBreath <br/> (Logo Pending) </h3>
 
           <hr></hr>
        
