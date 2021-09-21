@@ -23,3 +23,15 @@
     padding-left: 100px;
     padding-right: 100px;
 }
+
+.peopleContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.people {
+    max-width: 100%;
+    height: auto;
+    margin-top: 100px;
+    margin-left: 50px;
+}
