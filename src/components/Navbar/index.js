@@ -2,6 +2,7 @@ import React from 'react';
 import background from './bg.gif';
 import { Nav, NavLink, NavMenu} from './NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
+import Logo from './TradeBreath.png';
   
 const Navbar = () => {
   return (
@@ -18,8 +19,8 @@ const Navbar = () => {
           backgroundColor: '#000'
         }}
       >
-          <h3 id="logo"> TradeBreath <br/> (Logo Pending) </h3>
-
+          <img id="logo" src={Logo} />
+         
           <hr></hr>
        
           <NavMenu id="menu">
