@@ -6,11 +6,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages'
 import Products from './pages/products';
 import About from './pages/about';
+import {Redirect} from 'react-router-dom';
 
 
 function App() {
   return (
+    
     <Router>
+      <Redirect to='/index' exact component={Home}/>
       <Navbar />
         <Switch>
           <Route path='/index' exact component={Home} />
