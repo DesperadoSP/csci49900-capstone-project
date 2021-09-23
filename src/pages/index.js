@@ -2,12 +2,6 @@ import React from 'react';
 import Whirligig from 'react-whirligig'
 import placeholder from './placeholder.png';
 import placeholder2 from './placeholder-wide.png';
-
-const images = [
-  { url: {placeholder} },
-  { url: {placeholder} },
-  { url: {placeholder} },
-];
   
 const Home = () => {
   let whirligig
