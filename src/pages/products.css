@@ -1,0 +1,28 @@
+#productSearchBar {
+    margin-left: 25px;
+    padding: 3px;
+}
+
+#filterSearchBar {
+    margin-left: 25px;
+    padding: 3px;    
+}
+
+#productSearchButton {
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #fff;
+    margin-left: 10px;
+    font-size: 1em;
+    text-decoration: none;
+  }
+
+#productSearchButton:hover {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+
+.Title {
+    padding-left: 10px;
+}
