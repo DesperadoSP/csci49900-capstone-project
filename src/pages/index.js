@@ -42,19 +42,8 @@ const Home = () => {
 
       <br></br>
 
-      <footer>
-
-      </footer>
     </div>
   );
 };
   
 export default Home;
-
-/*
-  <SimpleImageSlider
-    width={896}
-    height={504}
-    images={images}
-  />
-*/

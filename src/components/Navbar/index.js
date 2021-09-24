@@ -15,7 +15,6 @@ const Navbar = () => {
           backgroundCover: `cover`,
           height: '90px',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: '1920px 110px',
           backgroundColor: '#000'
         }}
       >
@@ -46,6 +45,7 @@ const Navbar = () => {
 
           </NavMenu>
       </Nav>
+
       </div>
     </>
   );
