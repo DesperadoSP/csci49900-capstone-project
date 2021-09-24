@@ -30,7 +30,7 @@ const Home = () => {
         <button id='sliderbutton-next' onClick={next}>Next</button>
       </div>
     
-      <div id='chart-home'>
+      <div id='chart-div'>
         <img id="chart" src={placeholder2} />
 
         <br></br>
@@ -42,6 +42,17 @@ const Home = () => {
 
       <br></br>
 
+      <div id="data">
+        <h3>Dummy Data: </h3>
+        <ul> 
+          <li>Previous Close: </li>
+          <li>Open: </li>
+          <li>Volume: </li>
+          <li>Daily Percentage Change:</li>
+        </ul>
+      </div>
+
+      <br></br>
     </div>
   );
 };

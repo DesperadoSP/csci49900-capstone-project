@@ -19,8 +19,6 @@ const Navbar = () => {
         }}
       >
           {/* <img id="logo" src={Logo} /> */}
-         
-
        
           <NavMenu id="menu">
 

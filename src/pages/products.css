@@ -1,10 +1,16 @@
+#products-title h1{
+    margin-left: 6%;
+    color: #fff;
+    -webkit-text-stroke: 1px black;
+}
+
 #productSearchBar {
-    margin-left: 25px;
+    margin-left: 3%;
     padding: 3px;
 }
 
 #filterSearchBar {
-    margin-left: 25px;
+    margin-left: 2%;
     padding: 3px;    
 }
 

@@ -24,26 +24,12 @@ hr {
 }
 
 #menu {
-  /* padding-left: 30px; */
   margin-left: 65%;
-  /* margin-right: 200px; */
   align-items: center;
 }
 
 /* --------------- */
 
-/* Logo */
-
-#logo {
-  margin-top: 15px;
-  margin-left: 10px;
-  height: 60px;
-  width: 275px;
-  border-style: none;
-  border-width: 1px;
-}
-
-/* --------------- */
 
 /* Navigation Links */
 #link {
@@ -87,7 +73,6 @@ hr {
 
 /* Body */
 #content {
-  float: center;
   margin-top: 1%;
   margin-bottom: 1%;
   margin-left: 7%;
@@ -125,11 +110,35 @@ hr {
 
 #sliderbutton-prev {
   width: 50px;
+  height: 30px;
   margin-left: 10%;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+  font-size: 1em;
+}
+
+#sliderbutton-prev:hover {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  font-size: 1em;
 }
 
 #sliderbutton-next {
   width: 50px;
+  height: 30px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+  font-size: 1em;
+}
+
+#sliderbutton-next:hover {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  font-size: 1em;
 }
 
 #images {
@@ -139,7 +148,7 @@ hr {
   border-width: 1px;
 }
 
-#chart-home {
+#chart-div {
   justify-content: center;
 }
 
@@ -155,10 +164,62 @@ hr {
 
 #candlesticks-button {
   margin-left: 15%;
+  height: 30px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+  font-size: 1em;
+}
+
+#candlesticks-button:hover {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  font-size: 1em;
+}
+
+#line-button {
+  height: 30px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+  font-size: 1em;
+}
+
+#line-button:hover {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  font-size: 1em;
+}
+
+#data {
+  height: 150px;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000;
+  display: grid;
+}
+
+#data h3 {
+  margin-top: 1%;
+  margin-bottom: 0%;;
+  margin-left: 2%;
+}
+
+#data ul {
+  margin-top: 0%;
+  margin-left: 0%;
+  list-style: none;
 }
 
 /* --------------- */
 
+/* Footer */
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 10s linear;
@@ -173,3 +234,5 @@ hr {
     transform: rotate(360deg);
   }
 }
+
+/* --------------- */

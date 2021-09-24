@@ -4,16 +4,23 @@ import './products.css';
   
 const Home = () => {
   return (
-    <div>
-      <div className = "Title"><h1 className = "Title">Products</h1></div>
+    <div id='content'>
+      <div id='products-title'>
+        <h1> Products </h1>
+      </div>
+
       <Form inline id="productSearchBar">
         <FormControl type="text" placeholder="Search" id="productSearchBar"/>
-        <FormControl type="text" placeholder="Filter" id="filterSearchBar"/>
         <Button id="productSearchButton">
           Search
         </Button>   
+        <FormControl type="text" placeholder="Filter" id="filterSearchBar"/>
+        <Button id="productSearchButton">
+          Filter
+        </Button>   
       </Form>
         
+      <br></br>
     </div>
   );
 };
