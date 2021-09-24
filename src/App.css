@@ -24,8 +24,9 @@ hr {
 }
 
 #menu {
-  padding-left: 30px;
-  margin-right: 200px;
+  /* padding-left: 30px; */
+  margin-left: 65%;
+  /* margin-right: 200px; */
   align-items: center;
 }
 
@@ -35,10 +36,10 @@ hr {
 
 #logo {
   margin-top: 15px;
-  margin-left: 3.2%;
+  margin-left: 10px;
   height: 60px;
   width: 275px;
-  border-style: solid;
+  border-style: none;
   border-width: 1px;
 }
 
