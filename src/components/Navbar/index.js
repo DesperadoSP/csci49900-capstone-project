@@ -1,5 +1,5 @@
 import React from 'react';
-import background from './bg.gif';
+import background from './headergif.gif';
 import { Nav, NavLink, NavMenu} from './NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
 import Logo from './TradeBreath.png';
@@ -13,6 +13,7 @@ const Navbar = () => {
         style={{ 
           backgroundImage: `url(${background})`,
           backgroundCover: `cover`,
+          backgroundSize: '100%',
           height: '90px',
           backgroundRepeat: 'no-repeat',
           backgroundColor: '#000'

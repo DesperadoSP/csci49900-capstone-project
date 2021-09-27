@@ -99,8 +99,8 @@ hr {
 
 #slider {
   max-width: 95%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 12%;
+  margin-right: 12%;
   padding-bottom: 1%;
 }
 
@@ -111,7 +111,7 @@ hr {
 #sliderbutton-prev {
   width: 50px;
   height: 30px;
-  margin-left: 10%;
+  margin-left: 12%;
   color: #fff;
   background-color: #000;
   border: 1px solid #fff;
@@ -154,8 +154,8 @@ hr {
 
 #chart {
   height: 30%;
-  width: 70%;
-  margin-left: 15%;
+  width: 80%;
+  margin-left: 10%;
   margin-bottom: 1%;
   border-style: solid;
   border-width: 1px;
@@ -163,7 +163,7 @@ hr {
 }
 
 #candlesticks-button {
-  margin-left: 15%;
+  margin-left: 10%;
   height: 30px;
   color: #fff;
   background-color: #000;
@@ -195,8 +195,8 @@ hr {
 
 #data {
   height: 150px;
-  width: 70%;
-  margin-left: 15%;
+  width: 80%;
+  margin-left: 10%;
   margin-top: 1%;
   margin-bottom: 1%;
   border-style: solid;
