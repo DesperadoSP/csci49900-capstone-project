@@ -19,7 +19,7 @@ const Navbar = () => {
           backgroundColor: '#000'
         }}
       >
-          {/* <img id="logo" src={Logo} /> */}
+          <img id="logo" src={Logo} />
        
           <NavMenu id="menu">
 
