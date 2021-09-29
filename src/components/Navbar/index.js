@@ -1,5 +1,5 @@
 import React from 'react';
-import background from './headergif.gif';
+import background from './Sky.jpg';
 import { Nav, NavLink, NavMenu} from './NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
 import Logo from './TradeBreath.png';
@@ -12,11 +12,13 @@ const Navbar = () => {
       <Nav id ="navBar"
         style={{ 
           backgroundImage: `url(${background})`,
+          backgroundAttachment: 'fixed',
           backgroundCover: `cover`,
           backgroundSize: '100%',
-          height: '90px',
           backgroundRepeat: 'no-repeat',
-          backgroundColor: '#000'
+          height: '90px',
+          paddingTop: '0.5%',
+          paddingBottom: '0.5%'
         }}
       >
           <img id="logo" src={Logo} />

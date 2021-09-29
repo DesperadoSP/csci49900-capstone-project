@@ -4,9 +4,13 @@ import Adrian from './Adrian.png'
 import Alex from './Alex.png'
 import Diego from './Diego.png'
 import Edwin from './Edwin.png'
+
+import Navbar from '../components/Navbar';
   
 const About = () => {
   return (
+    <div id = "content">
+    <Navbar />
     <div className = "container">
       <div className = "aboutTitle">
         <h1>About Us</h1>
@@ -27,7 +31,7 @@ const About = () => {
           <img className = "people" src = {Diego} alt = "Diego Kervabon"></img>
           <img className = "people" src = {Edwin} alt = "Edwin Zhu"></img>
         </div>
-        
+      </div>  
     </div>
   );
 };

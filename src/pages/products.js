@@ -1,10 +1,15 @@
 import React from 'react';
 import { Form, FormControl, Button } from "react-bootstrap";
+import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import './products.css';
+
+import Navbar from '../components/Navbar';
   
 const Home = () => {
   return (
-    <div id='content'>
+    <div id='products'>
+      <Navbar />
+      <div id='list'>
       <div id='products-title'>
         <h1> Products </h1>
       </div>
@@ -20,7 +25,13 @@ const Home = () => {
         </Button>   
       </Form>
         
-      <br></br>
+        <ul> 
+          <li><NavLink to='/productX' activeStyle> <p>Product X</p> </NavLink></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
     </div>
   );
 };

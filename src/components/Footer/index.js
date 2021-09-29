@@ -1,5 +1,5 @@
 import React from 'react';
-import background from './footergif.gif';
+import background from './Sky.jpg';
 import logo from './logo.png';
 import '../../App.css';
 
@@ -17,7 +17,9 @@ const Footer = () => {
             style={{ 
                 backgroundImage: `url(${background})`,
                 backgroundCover: `cover`,
-                backgroundSize: '100% 100px',
+                backgroundSize: '100%',
+                backgroundPosition: 'center',
+                backgroundAttachment: 'fixed',
                 height: '100px',
                 backgroundRepeat: 'no-repeat',
                 backgroundColor: '#000',
