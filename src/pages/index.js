@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
 import Logo from '../components/Navbar/TradeBreath.png';
+import Chart from '../components/Chart/index';
 
   
 const Home = () => {
@@ -97,9 +98,8 @@ const Home = () => {
         
       <div id='chart-div'>
         <h1>Top Mover: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
-        <img id="chart" src={placeholder2} />
-
-        <br></br>
+        <Chart></Chart>
+        {/* <img id="chart" src={placeholder2} /> */}
 
         <button id="candlesticks-button">Candlestick Chart</button>
         <button id="line-button">Line Chart</button>

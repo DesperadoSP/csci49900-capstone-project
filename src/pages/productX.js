@@ -5,6 +5,7 @@ import './productX.css';
 import placeholder2 from './placeholder-wide.png';
 
 import Navbar from '../components/Navbar';
+import Chart from '../components/Chart/index';
 
 const Home = () => {
     return (
@@ -12,9 +13,8 @@ const Home = () => {
         <Navbar />
         <div id='chart-div'>
             <h1>Product X </h1>
-            <img id="chart" src={placeholder2} />
-
-        <br></br>
+            <Chart></Chart>
+            {/* <img id="chart" src={placeholder2} /> */}
 
             <button id="candlesticks-button">Candlestick Chart</button>
             <button id="line-button">Line Chart</button>
