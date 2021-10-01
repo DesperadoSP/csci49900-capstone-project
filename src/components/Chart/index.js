@@ -50,7 +50,7 @@ export default class Chart extends Component {
       },
       */
       chart: {
-        height: 750,
+        height: '60%',
         width: 1400,
       },
       credits: {

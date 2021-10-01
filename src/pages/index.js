@@ -24,7 +24,7 @@ const Home = () => {
       style={{ 
         backgroundImage: `url(${background})`,
         backgroundCover: `cover`,
-        backgroundSize: '100%',
+        backgroundSize: '100% 100%',
         backgroundAttachment: 'fixed',
         backgroundRepeat: 'no-repeat',
         backgroundColor: '#000'
@@ -65,7 +65,8 @@ const Home = () => {
         </Nav>
 
         </div>
-
+        
+        <div id='statement-and-articles'>
           <div id='statement'>
             <h1>Our mission is to let <br/> you invest safely</h1>
           </div>
@@ -93,12 +94,13 @@ const Home = () => {
             <button id='sliderbutton-next' onClick={next}>Next</button>
 
           </div>
-
+        </div>
       </div>
         
       <div id='chart-div'>
         <h1>Top Mover: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
         <Chart></Chart>
+        
         {/* <img id="chart" src={placeholder2} /> */}
 
         <button id="candlesticks-button">Candlestick Chart</button>

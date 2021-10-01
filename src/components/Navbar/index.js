@@ -14,7 +14,7 @@ const Navbar = () => {
           backgroundImage: `url(${background})`,
           backgroundAttachment: 'fixed',
           backgroundCover: `cover`,
-          backgroundSize: '100%',
+          backgroundSize: '100% 100%',
           backgroundRepeat: 'no-repeat',
           height: '90px',
           paddingTop: '0.5%',
