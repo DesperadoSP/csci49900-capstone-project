@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+/* eslint-disable */
+import { render } from '@testing-library/react';
+import React, {useState, Component} from 'react'
 import './App.css';
+
+class Navigation extends Component {
+  render() {
+    return (
+        <div>
+          <div className = {"navBar"}> 
+            Trade Breath 
+            <button className = {"navTabs"}> Home </button>
+            <button className = {"navTabs"}> Products </button>
+            <button className = {"navTabs"}> About </button>
+          </div>
+          <div className = {"searchBar"}>
+            <SearchBar ></SearchBar>
+          </div>
+        </div>
+          
+          
+    );
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className = "App">
+      <Navigation></Navigation>
     </div>
   );
+}
+
+function SearchBar() {
+  return (
+    <table className = {"table"}>
+            <tr>
+                <td>
+                    <input type = {"text"} size= {"25"} className = {"input-sm"} placeholder = {"Search"}/>
+                </td>
+            </tr>
+        </table>
+  )
 }
 
 export default App;
