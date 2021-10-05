@@ -8,8 +8,8 @@ import background from './Sky.jpg';
 import Navbar from '../components/Navbar';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
-import Logo from '../components/Navbar/TradeBreath.png';
 import Chart from '../components/Linechart/index';
+import Logo from '../components/Navbar/TradeBreath.gif';
 
   
 const Home = () => {
@@ -107,6 +107,21 @@ const Home = () => {
         <button id="candlesticks-button">Candlestick Chart</button>
         <button id="line-button">Line Chart</button>
 
+        <div id='product-article-title'>
+            <h1>Recent News Articles: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
+          </div>
+          <div id='product-article'>
+            <Whirligig id ='product-news-slider'
+              visibleSlides={3}
+              gutter="1em"
+              ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
+            >
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+            </Whirligig>
+          </div>
+
       <br></br>
 
         <div id="data">
@@ -119,6 +134,7 @@ const Home = () => {
           </ul>
         </div>
       </div>
+      
 
     </div>
 
