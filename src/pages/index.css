@@ -109,6 +109,20 @@
     max-width: 100%;
   }
 
+/* Product Article */
+#product-articl {
+  height: 100%;
+  max-width: 100%;
+}
+
+#product-news-slider {
+  max-width: 95%;
+  margin-left: 15%;
+  margin-right: 15%;
+  padding-bottom: 1%;
+}
+
+
 /* ---------------- */
   
   #chart-div {
