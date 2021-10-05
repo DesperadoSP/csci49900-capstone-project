@@ -5,7 +5,11 @@ import moment from 'moment'
 import './chart.css';
 
 export default class Chart extends Component {
+  state = {showing: true};
+
   render() {
+    const { showing } = this.state;
+
     const options = {style: 'currency', currency: 'USD'};
     const numberFormat = new Intl.NumberFormat('en-US', options);
     const configPrice = {
@@ -98,9 +102,15 @@ export default class Chart extends Component {
       }
       ]
     };
+
     return (
-      <div id='stock-chart'>
-         <ReactHighcharts config = {configPrice}></ReactHighcharts>
+      <div>
+        <div id='stock-chart'>
+          <ReactHighcharts config = {configPrice}></ReactHighcharts>     
+        </div>
+
+        {/* <button id="candlesticks-button">Candlestick Chart</button> */}
+        {/* <button id="line-button">Line Chart</button> */}
       </div>
     )
   }

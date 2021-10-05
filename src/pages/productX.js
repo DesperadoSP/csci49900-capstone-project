@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, FormControl, Button } from "react-bootstrap";
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import './productX.css';
 import placeholder2 from './placeholder-wide.png';
 
 import Navbar from '../components/Navbar';
-import Chart from '../components/Chart/index';
+import Chart from '../components/Linechart/index';
+import { render } from '@testing-library/react';
 
 const Home = () => {
     return (
@@ -13,7 +14,9 @@ const Home = () => {
         <Navbar />
         <div id='chart-div'>
             <h1>Product X </h1>
-            <Chart></Chart>
+            <div className='linechart'>
+                <Chart></Chart>
+            </div>
             {/* <img id="chart" src={placeholder2} /> */}
 
             <button id="candlesticks-button">Candlestick Chart</button>
