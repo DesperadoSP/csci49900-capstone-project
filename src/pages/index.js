@@ -8,7 +8,7 @@ import background from './Sky.jpg';
 import Navbar from '../components/Navbar';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
-import Chart from '../components/Linechart/index';
+import Chart from '../components/Charts/index';
 import Logo from '../components/Navbar/TradeBreath.gif';
 
   
@@ -90,6 +90,7 @@ const Home = () => {
               <img id="images" src={placeholder} />
               <img id="images" src={placeholder} />
             </Whirligig>
+            
             <button id="sliderbutton-prev" onClick={prev}>Prev</button>
             <button id='sliderbutton-next' onClick={next}>Next</button>
 
@@ -110,6 +111,7 @@ const Home = () => {
         <div id='product-article-title'>
             <h1>Recent News Articles: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
           </div>
+          {/*
           <div id='product-article'>
             <Whirligig id ='product-news-slider'
               visibleSlides={3}
@@ -121,6 +123,7 @@ const Home = () => {
               <img id="images" src={placeholder} />
             </Whirligig>
           </div>
+          */}
 
       <br></br>
 

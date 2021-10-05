@@ -3,12 +3,29 @@ import ReactHighcharts from 'react-highcharts/ReactHighstock.src'
 import priceData from './data.json'
 import moment from 'moment'
 import './chart.css';
+import placeholder from './placeholder-wide.png';
 
 export default class Chart extends Component {
-  state = {showing: true};
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: ""
+    }
+  }
+
+  hide = (e) => {
+    this.setState ({
+      visibility: "hidden"
+    })
+  }
+
+  view = (e) => {
+    this.setState ({
+      visibility: "block"
+    })
+  }   
 
   render() {
-    const { showing } = this.state;
 
     const options = {style: 'currency', currency: 'USD'};
     const numberFormat = new Intl.NumberFormat('en-US', options);
@@ -105,12 +122,24 @@ export default class Chart extends Component {
 
     return (
       <div>
-        <div id='stock-chart'>
+        <div id='stock-chart'
+        style={{
+          display: this.state.visibility
+        }}
+        >
           <ReactHighcharts config = {configPrice}></ReactHighcharts>     
         </div>
 
-        {/* <button id="candlesticks-button">Candlestick Chart</button> */}
-        {/* <button id="line-button">Line Chart</button> */}
+        <div id='stock-chart' 
+        style={{
+          display: this.state.visibility
+        }}
+        >
+          {/*<img src={placeholder} />*/}
+        </div>
+
+        {/*<button onClick={this.hide} id="candlesticks-button">Candlestick Chart</button> 
+        <button onClick={this.view} id="line-button">Line Chart</button> */}
       </div>
     )
   }

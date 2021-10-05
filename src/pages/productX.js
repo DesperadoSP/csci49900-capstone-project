@@ -5,7 +5,7 @@ import './productX.css';
 import placeholder2 from './placeholder-wide.png';
 
 import Navbar from '../components/Navbar';
-import Chart from '../components/Linechart/index';
+import Chart from '../components/Charts/index';
 import { render } from '@testing-library/react';
 
 const Home = () => {
