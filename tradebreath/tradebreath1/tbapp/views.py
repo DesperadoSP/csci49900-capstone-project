@@ -3,6 +3,7 @@ from alpaca_trade_api.rest import REST
 from alpaca_trade_api.rest import TimeFrame
 import alpaca_trade_api as tradeapi
 import datetime
+import requests
 
 # os.environ['APCA_API_KEY_ID'] = 'PK87MNNJ3DIDGDHWMTH6'
 # os.environ['APCA_API_SECRET_KEY'] = 'r8llTDlXflevWpchpjkqGPHLA5QYxIRs7tfCUY6n'
@@ -18,10 +19,15 @@ AVAILABLE_INTERVALS = {'Day': TimeFrame.Day,
 
 
 # THIS ACTUALLY CALLS ALPACA.
+# THIS ACTUALLY CALLS ALPACA.
 def get_alpaca_info(stock, interval, start, end):
   if interval not in AVAILABLE_INTERVALS:
     raise Exception("Interval not supported.")
-  return api.get_bars(stock, AVAILABLE_INTERVALS[interval], start, end)
+
+  response = requests.get("https://stocknewsapi.com/api/v1?tickers=" + stock + "&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy")
+  news = (response.json())
+
+  return api.get_bars(stock, AVAILABLE_INTERVALS[interval], start, end), news
 
 #my_get_bar("AAPL", 'Day', "2021-06-08", "2021-06-10")
 
