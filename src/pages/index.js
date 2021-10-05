@@ -8,7 +8,7 @@ import background from './Sky.jpg';
 import Navbar from '../components/Navbar';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
-import Logo from '../components/Navbar/TradeBreath.png';
+import Logo from '../components/Navbar/TradeBreath.gif';
 import Chart from '../components/Chart/index';
 
   
