@@ -1,4 +1,4 @@
-#chart-div {
+  #chart-div {
     justify-content: center;
     margin-left: 5%;
     margin-right: 5%;
@@ -16,7 +16,7 @@
     border: 1px solid #fff;
     font-size: 1em;
     border-radius: 35px;
-    width: 9%;
+    width: 160px;
   }
   
   #candlesticks-button:hover {
@@ -33,7 +33,7 @@
     border: 1px solid #fff;
     font-size: 1em;
     border-radius: 35px;
-    width: 6%;
+    width: 110px;
   }
   
   #line-button:hover {

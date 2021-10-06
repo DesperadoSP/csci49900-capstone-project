@@ -17,10 +17,6 @@ const Home = () => {
             <div className='linechart'>
                 <Chart></Chart>
             </div>
-            {/* <img id="chart" src={placeholder2} /> */}
-
-            <button id="candlesticks-button">Candlestick Chart</button>
-            <button id="line-button">Line Chart</button>
 
         <br></br>
 

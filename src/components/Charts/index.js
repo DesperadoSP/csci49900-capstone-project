@@ -6,27 +6,34 @@ import './chart.css';
 import placeholder from './placeholder-wide.png';
 
 export default class Chart extends Component {
+/* Controls the buttons to view either the linechart or candlstick chart */
   constructor(props) {
     super(props);
     this.state = {
-      visibility: ""
+      linechart_Visibility: "block",
+      candlestick_Visibility: "none"
     }
   }
 
-  hide = (e) => {
+  hidelinechart_showcandlestick = (e) => {
     this.setState ({
-      visibility: "hidden"
+      linechart_Visibility: "none",
+      candlestick_Visibility: "block"
     })
   }
 
-  view = (e) => {
+  viewlinechart_hidecandlstick= (e) => {
     this.setState ({
-      visibility: "block"
+      linechart_Visibility: "block",
+      candlestick_Visibility: "none"
     })
-  }   
+  } 
+
+/* -------------------------------------------- */
 
   render() {
 
+    /* Logic for the Linechart */
     const options = {style: 'currency', currency: 'USD'};
     const numberFormat = new Intl.NumberFormat('en-US', options);
     const configPrice = {
@@ -120,26 +127,43 @@ export default class Chart extends Component {
       ]
     };
 
+    /* ------------------------------------- */
+
+    /* Place logic for the candlestick chart here */
+
+    /* ------------------------------------- */
+
     return (
       <div>
         <div id='stock-chart'
         style={{
-          display: this.state.visibility
+          display: this.state.linechart_Visibility
         }}
         >
           <ReactHighcharts config = {configPrice}></ReactHighcharts>     
         </div>
 
-        <div id='stock-chart' 
+        <div
         style={{
-          display: this.state.visibility
+          display: this.state.candlestick_Visibility,
+          marginLeft: '10%',
+          marginBottom: '1%',
         }}
         >
-          {/*<img src={placeholder} />*/}
+          <img 
+          style={{
+            height: '600px'
+          }}
+          classname='candlestick-chart' src={placeholder} 
+          />
         </div>
 
-        {/*<button onClick={this.hide} id="candlesticks-button">Candlestick Chart</button> 
-        <button onClick={this.view} id="line-button">Line Chart</button> */}
+        <button onClick={this.hidelinechart_showcandlestick} 
+          id="candlesticks-button">Candlestick Chart
+        </button> 
+        <button onClick={this.viewlinechart_hidecandlstick}
+          id="line-button">Line Chart
+        </button> 
       </div>
     )
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import background from './Sky.jpg';
 import { Nav, NavLink, NavMenu} from './NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
-import Logo from './TradeBreath.png';
+import Logo from './TradeBreath.gif';
   
 const Navbar = () => {
   return (

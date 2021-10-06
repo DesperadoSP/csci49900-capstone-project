@@ -1,7 +1,6 @@
 import React from 'react';
-import Whirligig from 'react-whirligig'
+import Whirligig from 'react-whirligig';
 import placeholder from './placeholder.png';
-import placeholder2 from './placeholder-wide.png';
 import './index.css'
 import background from './Sky.jpg';
 
@@ -89,6 +88,13 @@ const Home = () => {
               <img id="images" src={placeholder} />
               <img id="images" src={placeholder} />
               <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+
             </Whirligig>
             
             <button id="sliderbutton-prev" onClick={prev}>Prev</button>
@@ -103,27 +109,6 @@ const Home = () => {
         <div className='linechart'>
           <Chart></Chart>
         </div>
-        {/* <img id="chart" src={placeholder2} /> */}
-
-        <button id="candlesticks-button">Candlestick Chart</button>
-        <button id="line-button">Line Chart</button>
-
-        <div id='product-article-title'>
-            <h1>Recent News Articles: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
-          </div>
-          {/*
-          <div id='product-article'>
-            <Whirligig id ='product-news-slider'
-              visibleSlides={3}
-              gutter="1em"
-              ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
-            >
-              <img id="images" src={placeholder} />
-              <img id="images" src={placeholder} />
-              <img id="images" src={placeholder} />
-            </Whirligig>
-          </div>
-          */}
 
       <br></br>
 
@@ -136,58 +121,29 @@ const Home = () => {
             <li>Daily Percentage Change:</li>
           </ul>
         </div>
+
+        <div id='product-article-title'>
+          <h1>Recent News Articles: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
+        </div>
+
+        {/*
+          <div id='product-article'>
+            <Whirligig id ='product-news-slider'
+              visibleSlides={3}
+              gutter="1em"
+              ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
+            >
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} />
+            </Whirligig>
+          </div>
+        */}
+
       </div>
       
 
     </div>
-
-    /*
-    <div id='content'>
-      <div id='title'>
-        <h1>Top News Articles</h1>
-      </div>
-     
-      <div id='newsArticles'>
-        <Whirligig id ='slider'
-          visibleSlides={3}
-          gutter="1em"
-          ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
-          >
-            <img id="images" src={placeholder} />
-            <img id="images" src={placeholder} />
-            <img id="images" src={placeholder} />
-            <img id="images" src={placeholder} />
-            <img id="images" src={placeholder} />
-        </Whirligig>
-        <button id="sliderbutton-prev" onClick={prev}>Prev</button>
-        <button id='sliderbutton-next' onClick={next}>Next</button>
-      </div>
-    
-      <div id='chart-div'>
-        <img id="chart" src={placeholder2} />
-
-        <br></br>
-
-        <button id="candlesticks-button">Candlestick Chart</button>
-        <button id="line-button">Line Chart</button>
-
-      </div>
-
-      <br></br>
-
-      <div id="data">
-        <h3>Dummy Data: </h3>
-        <ul> 
-          <li>Previous Close: </li>
-          <li>Open: </li>
-          <li>Volume: </li>
-          <li>Daily Percentage Change:</li>
-        </ul>
-      </div>
-
-      <br></br>
-    </div>
-    */
   );
 };
   
