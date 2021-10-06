@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Whirligig from 'react-whirligig'
 import placeholder from './placeholder.png';
 import placeholder2 from './placeholder-wide.png';
@@ -11,11 +11,32 @@ import { Form, FormControl, Button } from "react-bootstrap";
 import Chart from '../components/Charts/index';
 import Logo from '../components/Navbar/TradeBreath.gif';
 
+import ChartJS from '../components/CandleChart/chart';
+import dataSource from '../components/CandleChart/data'
+import CandleApp from '../components/CandleChart/chart';
+
   
 const Home = () => {
   let whirligig
   const next = () => whirligig.next()
   const prev = () => whirligig.prev()
+
+
+  /*-------------*/
+  /*
+  const [chartsToDisplay, setChartsToDisplay] = useState([]);
+
+  const getData = async => {
+    const charts = [];
+    charts.push(<ChartJS key = {1} data = {MadeData} />);
+    setChartsToDisplay(charts)
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  /*-------------*/
 
   return (
     <div id='content'>
@@ -102,6 +123,7 @@ const Home = () => {
         <h1>Top Mover: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
         <div className='linechart'>
           <Chart></Chart>
+          <CandleApp></CandleApp>
         </div>
         {/* <img id="chart" src={placeholder2} /> */}
 
