@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react'
 
 import Chart, {
   CommonSeriesSettings,
@@ -10,18 +10,17 @@ import Chart, {
   ValueAxis,
   Title,
   Legend,
-  Export,
   Tooltip
 } from 'devextreme-react/chart';
 
 import { dataSource } from './data.js';
 
-class CandleApp extends React.Component {
+export default class CandleChart extends React.Component {
   render() {
     return (
       <Chart
         id="chart"
-        title="Stock Price"
+        title="Product X"
         dataSource={dataSource}
       >
         <CommonSeriesSettings
@@ -37,7 +36,7 @@ class CandleApp extends React.Component {
         >
           <Reduction color="red" />
         </Series>
-        <ArgumentAxis workdaysOnly={true}>
+        <ArgumentAxis workdaysOnly={false}>
           <Label format="shortDate" />
         </ArgumentAxis>
         <ValueAxis tickInterval={1}>
@@ -49,8 +48,7 @@ class CandleApp extends React.Component {
             />
           </Label>
         </ValueAxis>
-        <Legend itemTextPosition="left" />
-        <Export enabled={true} />
+        <Legend itemTextPosition="left"/>
         <Tooltip
           enabled={true}
           location="edge"
@@ -63,11 +61,9 @@ class CandleApp extends React.Component {
   customizeTooltip(arg) {
     return {
       text: `Open: $${arg.openValue}<br/>
-Close: $${arg.closeValue}<br/>
-High: $${arg.highValue}<br/>
-Low: $${arg.lowValue}<br/>`
+      Close: $${arg.closeValue}<br/>
+      High: $${arg.highValue}<br/>
+      Low: $${arg.lowValue}<br/>`
     };
   }
 }
-
-export default CandleApp;

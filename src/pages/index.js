@@ -4,11 +4,10 @@ import Whirligig from 'react-whirligig'
 import placeholder from './placeholder.png';
 import './index.css'
 import background from './Sky.jpg';
-
-import Navbar from '../components/Navbar';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
-import Chart from '../components/Charts/index';
+
+import Chart from '../components/LineChart/index';
 import Logo from '../components/Navbar/TradeBreath.gif';
 
 import ChartJS from '../components/CandleChart/chart';
@@ -130,7 +129,6 @@ const Home = () => {
         <h1>Top Mover: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
         <div className='linechart'>
           <Chart></Chart>
-          <CandleApp></CandleApp>
         </div>
 
       <br></br>

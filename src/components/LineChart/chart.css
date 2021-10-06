@@ -1,0 +1,16 @@
+.visibile {
+  display: block;
+  margin-left: 10%;
+  margin-bottom: 1%;
+}
+
+.invisible {
+  display: none;
+  margin-left: 10%;
+  margin-bottom: 1%;
+}
+
+#stock-chart {
+  margin-left: 10%;
+  margin-bottom: 1%;
+}

@@ -7,7 +7,11 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "animation-frame": "^0.3.0",
     "bootstrap": "^5.1.0",
+    "d3-scale": "^4.0.2",
+    "devextreme": "^21.1.5",
+    "devextreme-react": "^21.1.5",
     "gh-pages": "^3.2.3",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -20,6 +24,7 @@
     "react-scripts": "^4.0.3",
     "react-simple-image-slider": "^2.2.0",
     "react-slideshow-image": "^3.5.0",
+    "react-stockcharts": "^0.7.8",
     "react-whirligig": "^6.6.15",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2"
@@ -49,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "devextreme-themebuilder": "^21.1.5"
   }
 }

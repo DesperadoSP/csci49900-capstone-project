@@ -4,9 +4,11 @@ import priceData from './data.json'
 import moment from 'moment'
 import './chart.css';
 import placeholder from './placeholder-wide.png';
+import CandleApp from '../CandleChart/chart';
+import CandleChart from '../CandleChart/chart';
 
-export default class Chart extends Component {
-/* Controls the buttons to view either the linechart or candlstick chart */
+export default class LineChart extends Component {
+/* Controls the buttons to view either the linechart or candlestick chart */
   constructor(props) {
     super(props);
     this.state = {
@@ -143,28 +145,24 @@ export default class Chart extends Component {
           <ReactHighcharts config = {configPrice}></ReactHighcharts>     
         </div>
 
-        <div
+        <div 
         style={{
           display: this.state.candlestick_Visibility,
           marginLeft: '10%',
           marginBottom: '1%',
         }}
         >
-          <img 
-          style={{
-            height: '600px'
-          }}
-          classname='candlestick-chart' src={placeholder} 
-          />
+          <CandleApp></CandleApp>
         </div>
-
+        
         <button onClick={this.hidelinechart_showcandlestick} 
           id="candlesticks-button">Candlestick Chart
         </button> 
         <button onClick={this.viewlinechart_hidecandlstick}
           id="line-button">Line Chart
         </button> 
+        
       </div>
     )
   }
-}
+} 
