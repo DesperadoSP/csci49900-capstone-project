@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './chart.css'
 
 import Chart, {
   CommonSeriesSettings,
@@ -17,18 +18,21 @@ import { dataSource } from './data.js';
 
 export default class CandleChart extends React.Component {
   render() {
+
     return (
+      
       <Chart
         id="chart"
         title="Product X"
         dataSource={dataSource}
       >
+        
         <CommonSeriesSettings
           argumentField="date"
           type="candlestick"
         />
         <Series
-          name="SOMESTOCKNAME"
+          name="Product X"
           openValueField="o"
           highValueField="h"
           lowValueField="l"
