@@ -130,7 +130,7 @@ const Home = () => {
         <div className='linechart'>
           <Chart></Chart>
         </div>
-
+        
       <br></br>
 
         <div id="data">

@@ -152,7 +152,9 @@ export default class LineChart extends Component {
           marginBottom: '1%',
         }}
         >
-          <CandleApp></CandleApp>
+          <CandleChart></CandleChart>
+          <br></br>
+          <div><h4 id = 'fillExplain'>If the stock closes higher than its opening price, no color fills its body and if the stock closes lower than its opening price, a color fill is applied.</h4></div>
         </div>
         
         <button onClick={this.hidelinechart_showcandlestick} 
