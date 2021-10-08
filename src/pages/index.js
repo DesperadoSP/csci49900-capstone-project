@@ -6,6 +6,7 @@ import './index.css'
 import background from './Sky.jpg';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
+/* import axios from 'axios'; */
 
 import Chart from '../components/LineChart/index';
 import Logo from '../components/Navbar/TradeBreath.gif';
@@ -14,12 +15,50 @@ import ChartJS from '../components/CandleChart/chart';
 import dataSource from '../components/CandleChart/data'
 import CandleApp from '../components/CandleChart/chart';
 
+/*
+function APICall() {
+  let[input, getInput] = useState({});
+  let[inputValue, setInputValue] = useState("");
+  let onChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  useEffect(() => {
+    getInfo();
+  },
+  []);
+
+  let getInfo = async() => {
+    let response = await fetch()
+  }
+}
+*/
   
 const Home = () => {
+
+/* API Call */
+  let[input, setInput] = useState({});
+  let[inputValue, setInputValue] = useState("");
+  let onChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  useEffect(() => {
+    getInfo();
+  },
+  []);
+
+  let getInfo = async() => {
+    let response = await fetch("/tbapp/?stock=" + inputValue + "&interval=Day&start_date=2021-10-06&end_date=2021-10-06");
+    let info = await response.json();
+    setInput(info);
+  } 
+  /* ------------------ */
+
+
   let whirligig
   const next = () => whirligig.next()
   const prev = () => whirligig.prev()
-
 
   /*-------------*/
   /*
@@ -74,9 +113,11 @@ const Home = () => {
 
           <Form inline id="searchBar">
               <FormControl type="text" placeholder="Search" id="searchBar"
+              value={inputValue}
+              onChange={onChange}
             />
 
-            <Button id="searchButton">
+            <Button id="searchButton" onClick={getInfo}>
               Search
             </Button>
           </Form>
@@ -134,12 +175,12 @@ const Home = () => {
       <br></br>
 
         <div id="data">
-          <h3>Dummy Data: </h3>
+          <h3> {inputValue} </h3>
           <ul> 
             <li>Previous Close: </li>
-            <li>Open: </li>
-            <li>Volume: </li>
-            <li>Daily Percentage Change:</li>
+            <li>Open: {input.o} </li>
+            <li>Volume: {input.v} </li>
+            <li>Daily Percentage Change: {input.news_url}</li>
           </ul>
         </div>
 
