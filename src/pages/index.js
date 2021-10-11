@@ -6,7 +6,7 @@ import './index.css'
 import background from './Sky.jpg';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
-/* import axios from 'axios'; */
+import axios from 'axios'; 
 
 import Chart from '../components/LineChart/index';
 import Logo from '../components/Navbar/TradeBreath.gif';
@@ -14,29 +14,38 @@ import Logo from '../components/Navbar/TradeBreath.gif';
 import ChartJS from '../components/CandleChart/chart';
 import dataSource from '../components/CandleChart/data'
 import CandleApp from '../components/CandleChart/chart';
-
-/*
-function APICall() {
-  let[input, getInput] = useState({});
-  let[inputValue, setInputValue] = useState("");
-  let onChange = (event) => {
-    setInputValue(event.target.value);
-  };
-
-  useEffect(() => {
-    getInfo();
-  },
-  []);
-
-  let getInfo = async() => {
-    let response = await fetch()
-  }
-}
-*/
+import { AxisConstantLineStyle } from 'devextreme-react/chart';
   
 const Home = () => {
 
-/* API Call */
+  const [tbapp, settbapp]= useState("");
+  const [stock, setstock]= useState("");
+  const [found, setFound]= useState(false);
+  
+  function stockChange(event){
+    setstock(event.target.value);
+  } 
+
+  async function tbappChange() {
+    try {
+    let response = await axios.get('/tbapp/?stock=' + stock + '&interval=Day&start_date=2021-10-10&end_date=2021-10-10' , { mode: "no-cors" });
+    /*let response = await axios.get('https://stocknewsapi.com/api/v1?tickers=' + stock + '&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy');(/)
+    /*let response = await axios.get("https://goweather.herokuapp.com/weather/"+ stock );*/  
+    /*The above line is for Testing pursposes to see if app connects to an expernal api which it does*/ 
+      settbapp(response.data);
+      console.log(response.data); /* This is what I used to get to display on the console */
+      setFound(true);
+    }catch(error) {
+      if(error.response) {
+        console.log(error.response.data);
+        setFound(false);
+      }
+    }
+  }
+
+
+/* API Call -- This portion is an experiment -- */
+/*
   let[input, setInput] = useState({});
   let[inputValue, setInputValue] = useState("");
   let onChange = (event) => {
@@ -49,12 +58,13 @@ const Home = () => {
   []);
 
   let getInfo = async() => {
-    let response = await fetch("/tbapp/?stock=" + inputValue + "&interval=Day&start_date=2021-10-06&end_date=2021-10-06");
+    let response = await fetch('/tbapp/?stock=' + inputValue + '&interval=Day&start_date=2021-10-06&end_date=2021-10-06' , {responseType: 'text'});
     let info = await response.json();
     setInput(info);
+    console.log(info); 
   } 
+  */
   /* ------------------ */
-
 
   let whirligig
   const next = () => whirligig.next()
@@ -112,12 +122,14 @@ const Home = () => {
           </NavLink>
 
           <Form inline id="searchBar">
-              <FormControl type="text" placeholder="Search" id="searchBar"
-              value={inputValue}
-              onChange={onChange}
-            />
+              <FormControl type="text" 
+              id="searchBar"
+              /* value={inputValue} */
+               onChange={stockChange} 
+          />
 
-            <Button id="searchButton" onClick={getInfo}>
+            <Button id="searchButton" 
+            onClick={tbappChange}>
               Search
             </Button>
           </Form>
@@ -175,13 +187,20 @@ const Home = () => {
       <br></br>
 
         <div id="data">
-          <h3> {inputValue} </h3>
-          <ul> 
-            <li>Previous Close: </li>
-            <li>Open: {input.o} </li>
-            <li>Volume: {input.v} </li>
-            <li>Daily Percentage Change: {input.news_url}</li>
-          </ul>
+          {found ?
+          <div>
+            <h3> {stock} </h3>
+            <br></br>
+            <ul> 
+              <li>Previous Close: {tbapp.vw} </li>
+
+              <li>Open: {tbapp.o} </li>
+
+              <li>Volume: {tbapp.c} </li>
+
+            </ul>
+          </div>
+          : <h3> No Results </h3>}
         </div>
 
         <div id='product-article-title'>
