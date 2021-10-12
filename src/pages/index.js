@@ -1,5 +1,6 @@
 /* import React from 'react'; */
 import React, { useEffect, useState } from 'react';
+import { ReactDOM } from 'react';
 import Whirligig from 'react-whirligig'
 import placeholder from './placeholder.png';
 import './index.css'
@@ -18,6 +19,7 @@ import { AxisConstantLineStyle } from 'devextreme-react/chart';
   
 const Home = () => {
 
+
   const [tbapp, settbapp]= useState("");
   const [stock, setstock]= useState("");
   const [found, setFound]= useState(false);
@@ -28,12 +30,12 @@ const Home = () => {
 
   async function tbappChange() {
     try {
-    let response = await axios.get('/tbapp/?stock=' + stock + '&interval=Day&start_date=2021-10-10&end_date=2021-10-10' , { mode: "no-cors" });
-    /*let response = await axios.get('https://stocknewsapi.com/api/v1?tickers=' + stock + '&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy');(/)
+    let response = await axios.get('/tbapp/?stock=' + stock + '&interval=Day&start_date=2021-10-06&end_date=2021-10-10' , { mode: "no-cors" });
+    /*let response = await axios.get('https://stocknewsapi.com/api/v1?tickers=' + stock + '&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy');
     /*let response = await axios.get("https://goweather.herokuapp.com/weather/"+ stock );*/  
-    /*The above line is for Testing pursposes to see if app connects to an expernal api which it does*/ 
+    /*The above line is for Testing pursposes to see if app connects to an external api which it does*/ 
       settbapp(response.data);
-      console.log(response.data); /* This is what I used to get to display on the console */
+      console.log(response.data); 
       setFound(true);
     }catch(error) {
       if(error.response) {
@@ -122,7 +124,7 @@ const Home = () => {
           </NavLink>
 
           <Form inline id="searchBar">
-              <FormControl type="text" 
+              <FormControl type="text" autoComplete="off"
               id="searchBar"
               /* value={inputValue} */
                onChange={stockChange} 
@@ -179,7 +181,7 @@ const Home = () => {
       </div>
         
       <div id='chart-div'>
-        <h1>Top Mover: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
+        <h1>Top Mover: <NavLink to='/productX' id='productX-Link'> {stock} </NavLink></h1>
         <div className='linechart'>
           <Chart></Chart>
         </div>
@@ -204,7 +206,7 @@ const Home = () => {
         </div>
 
         <div id='product-article-title'>
-          <h1>Recent News Articles: <NavLink to='/productX' id='productX-Link'> Product X </NavLink></h1>
+          <h1>Recent News Articles: <NavLink to='/productX' id='productX-Link'> {stock} </NavLink></h1>
         </div>
 
         {/*

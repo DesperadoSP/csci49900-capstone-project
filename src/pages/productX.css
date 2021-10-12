@@ -4,6 +4,10 @@
     margin-right: 5%;
   }
 
+  #chart-div::-webkit-scrollbar {
+    display: none;
+  }
+
   #chart-div h1 {
     margin-left: 10%;
   }

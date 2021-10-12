@@ -13,8 +13,10 @@ export default class LineChart extends Component {
     super(props);
     this.state = {
       linechart_Visibility: "block",
-      candlestick_Visibility: "none"
-    }
+      candlestick_Visibility: "none",
+      items: []
+    };
+
   }
 
   hidelinechart_showcandlestick = (e) => {
@@ -33,7 +35,46 @@ export default class LineChart extends Component {
 
 /* -------------------------------------------- */
 
+/*
+constructor() {
+  super();
+
+  this.state = {
+    'items': []
+  }
+}
+*/
+
+componentDidMount() {
+  /* this.getItems(); */
+  fetch('https://stocknewsapi.com/api/v1?tickers=AAPL&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy')
+  .then(response => response.json())
+  .then(
+    (result) => {
+      this.setState ({
+        items : result
+      });
+    }
+  )
+}
+
+/*
+getItems() {
+  fetch('https://stocknewsapi.com/api/v1?tickers=AAPL&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy')
+  .then(results => results.json())
+  .then((results) => {
+    this.setState({
+      items: results
+    });
+  });
+}
+*/
+
+/* -------------------------------------------- */
+
   render() {
+    const {items} = this.state;
+    console.log(items)
 
     /* Logic for the Linechart */
     const options = {style: 'currency', currency: 'USD'};
@@ -170,8 +211,9 @@ export default class LineChart extends Component {
         <button onClick={this.viewlinechart_hidecandlstick}
           id="line-button">Line Chart
         </button> 
-        
+
+
       </div>
-    )
+    );
   }
 } 
