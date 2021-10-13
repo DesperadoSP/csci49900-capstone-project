@@ -133,7 +133,7 @@ const Home = () => {
           : <h3> No Results </h3>}
         </div>
 
-        <div>
+        {/* <div>
           {articles.map(({ title, image_url, text}) => (
             <NewsItem
               title={title}
@@ -141,7 +141,7 @@ const Home = () => {
               text={text}
             />
           ))}
-        </div>
+        </div> */}
 
         <div id='product-article-title'>
           <h1>Recent News Articles: {stock} </h1>
@@ -149,16 +149,24 @@ const Home = () => {
 
         <div id='newsArticles'>
             <Whirligig className ='product-slider'
-              visibleSlides={4}
+              visibleSlides={3}
               gutter="1em"
               ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
             >
+              {/* <img id="images" src={placeholder} />
               <img id="images" src={placeholder} />
               <img id="images" src={placeholder} />
               <img id="images" src={placeholder} />
               <img id="images" src={placeholder} />
-              <img id="images" src={placeholder} />
-              <img id="images" src={placeholder} />
+              <img id="images" src={placeholder} /> */}
+              
+              {articles.map(({ title, image_url, text}) => (
+                <NewsItem
+                  title={title}
+                  image_url={image_url} onClick
+                  text={text}
+                />
+              ))}
 
             </Whirligig>
             <div className='buttons'>
