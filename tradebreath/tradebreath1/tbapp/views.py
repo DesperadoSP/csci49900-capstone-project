@@ -49,3 +49,21 @@ def view_bars(request):
   return HttpResponse(get_alpaca_info(parsed_params['stock'], parsed_params['interval'], parsed_params['start_date'], parsed_params['end_date']))
 
 #view_bars({"stock" : "AAPL", "interval": 'Day', "start_date": "2021-06-08"})
+
+#get_linechart_data: returns an array of timestamps and the vwap value
+def get_linechart_data(bars): #Use this on the output of api.get_bars
+    data = bars.df
+    arr = []
+    for x in data.itertuples():
+      ts = x.Index
+      arr.append((ts.strftime('%Y-%m-%d %X'), x.vwap))
+    return arr
+
+#get_candlestick_data: returns an array of timestamp and low,high,open, and close prices
+def get_candlestick_data(bars): #Use this on the output of api.get_bars
+    data = bars.df
+    arr = []
+    for x in data.itertuples():
+      ts = x.Index
+      arr.append((ts.strftime('%Y-%m-%d %X'), x.low, x.high, x.open, x.close))
+    return arr
