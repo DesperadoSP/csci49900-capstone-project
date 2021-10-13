@@ -53,7 +53,7 @@ const Home = () => {
       /* console.log(res); */
     };
     getArticles();
-  });
+  },[null]);
   
 
     let whirligig
