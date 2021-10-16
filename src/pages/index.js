@@ -1,8 +1,6 @@
-/* import React from 'react'; */
 import React, { useEffect, useState } from 'react';
 import { ReactDOM } from 'react';
 import Whirligig from 'react-whirligig'
-import placeholder from './placeholder.png';
 import './index.css'
 import background from './Sky.jpg';
 import DailyArticles from './dailyArticles';
@@ -28,7 +26,7 @@ const Home = () => {
   const [stock, setStock]= useState("TSLA");
 
   /* const [block, setBlock] = useState("block") */
-  const [hidden, setHidden] = useState("block")
+  const [hidden, setHidden] = useState("block");
   
   function stockChange(event){
     setStock(event.target.value);
@@ -71,7 +69,7 @@ const Home = () => {
 
   const getStockInfo = async () => {
     const info = await axios.get (
-      'http://api.marketstack.com/v1/eod?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock + '&%20date_from=2021-10-15' , { mode: "no-cors" }
+      'http://api.marketstack.com/v1/eod/latest?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock /*+ '&%20date_from=2021-10-15'*/ , { mode: "no-cors" }
     );
     setStockInfo(info.data.data);
     console.log(info);
@@ -190,7 +188,7 @@ const Home = () => {
     </div>
         
     <div id='chart-div'>
-        <h1>Featured Stock: <NavLink to='/productX' id='productX-Link'> {stock} </NavLink></h1>
+        <h1><NavLink to='/productX' id='productX-Link'> {stock} </NavLink></h1>
         <div className='linechart'>
           <Chart></Chart>
         </div>

@@ -90,3 +90,36 @@ hr {
 }
 
 /* --------------- */
+
+
+/* Landing Page */
+
+.landing-Background h1{
+  color: #fff;
+  text-align: center;
+  padding-top: 7%;
+  padding-bottom: 1%;
+  font-size: 80px;
+  font-weight: bold;
+  -webkit-text-stroke: 1px white;
+}
+
+.landing-Background button {
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-bottom: 15%;
+  margin-left: 48%;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #fff;
+}
+
+.landing-Background button:hover {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.landing-Background button h3 {
+  font-size: 20px;
+}
