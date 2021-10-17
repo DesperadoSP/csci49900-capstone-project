@@ -7,6 +7,10 @@
     border: 1px solid #000;
 }
 
+.aboutContainer {
+    
+}
+
 .aboutTitle {
     text-align: center;
     padding-left: 100px;
@@ -71,4 +75,67 @@
     height: auto;
     margin-left: 50px;
     padding-bottom: 50px;
+}
+
+.one {
+    background-color: rgb(170, 224, 255);
+    padding: 100px 16px;
+}
+
+.two {
+    text-align: center;
+    font-size: 75px;
+    color: white;
+}
+
+.three {
+    text-align: center;
+    font-size: 30px;
+    color: white;
+}
+
+.four {
+    padding: 84px
+}
+
+.five {
+    font-size: 55px;
+}
+
+.six {
+    font-size: 20px;
+}
+.seven {
+    width: 400px;
+    float: right;
+    padding-right: 30px;
+}
+
+.eight {
+    padding: 80px;
+    background-color: rgb(228, 228, 228);
+}
+
+.nine {
+    font-size: 55px;
+    text-align: center;
+}
+
+.eleven {
+    font-size: 20px;
+    text-align: center;
+}
+
+.twelve {
+    padding-top: 64px;
+    display: flex;
+    justify-content: center;
+}
+
+.thirteen {
+    display: block;  
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    width: 300px;
 }

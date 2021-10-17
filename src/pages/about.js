@@ -171,14 +171,53 @@ const About = () => {
     <div style={{
       display: hidden
     }}>
-    <div className = "container">
-      <div className = "aboutTitle">
+    
+    <div className ="one">
+      <h1 className = "two">About Us</h1>
+      <p className = "three">TradeBreath</p>
+    </div>
+
+    <div className = "four">
+      
+      <h1 className = "five">What is TradeBreath?</h1>
+      <img className = "seven" src = {StockPic} alt = "decoPic"></img>
+      <p className = "six"> TradeBreath is a finanicial website which provides stock information such as: open, close, high low, volume of the stock with the line chart and a candlestick chart. <br></br><br></br> Line chart provides the current price of the stock with the dates. Investor can filter the data by the periods of 3 months, 1 month, 7 days, or 1 day. <br></br><br></br> Candlestick chart provides the investor with the open price, close price, high price and a low price for the stock. <br></br><br></br> We want every investor to invest safe by providing the lastest news of the specific sotck along with the news from the stock market. </p>
+      
+      
+    </div>
+
+    <div className = "eight">
+      
+      <h1 className = "nine">Who We Are</h1>
+      <p className = "eleven"> We are stduent of Hunter College and this website is a project for the class CSCI 49900.</p>
+      <img className = "thirteen" src = {HunterPic} alt = "hunterPic"></img>
+      
+    </div>
+      <div className = "twelve">
+          <img className = "people" src = {Adrian} alt = "Adrian Ramirez"></img>
+          <img className = "people" src = {Alex} alt = "Alex Jun"></img>
+          <img className = "people" src = {Diego} alt = "Diego Kervabon"></img>
+          <img className = "people" src = {Edwin} alt = "Edwin Zhu"></img>
+      </div>
+
+
+
+
+
+
+
+
+    {/* <div className = "container">
+      <div className = "aboutContainer">
+        <div className = "aboutTitle">
         <h1>TradeBreath</h1>
       </div>
         <img className = "stockPic" src = {StockPic} alt = "decoPic"></img>
         <div className = "aboutContent">
-             <p> TradeBreath is a finanicial website which provides stock information such as: open, close, high low, volume of the stock with the line chart and a candlestick chart. <br></br> We want every investor to invest safe by providing the lastest news of the specific sotck along with the news from the stock market. </p>
+             <p> TradeBreath is a finanicial website which provides stock information such as: open, close, high low, volume of the stock with the line chart and a candlestick chart. <br></br><br></br> Line chart provides the current price of the stock with the dates. Investor can filter the data by the periods of 3 months, 1 month, 7 days, or 1 day. <br></br><br></br> Candlestick chart provides the investor with the open price, close price, high price and a low price for the stock. <br></br><br></br> We want every investor to invest safe by providing the lastest news of the specific sotck along with the news from the stock market. </p>
         </div>
+      </div>
+      
         
       <br></br>
       <br></br>
@@ -190,13 +229,6 @@ const About = () => {
       <br></br>
       <br></br>
       <br></br>
-      
-      {/* <div className = "chartTitle">
-        <h1>Charts</h1>
-      </div>
-        <div className = "aboutContent">
-           <p> Line chart is  </p>
-        </div> */}
 
       <div className = "whoTitle">
         <h1>Who We Are</h1>
@@ -233,7 +265,7 @@ const About = () => {
           <img className = "people" src = {Diego} alt = "Diego Kervabon"></img>
           <img className = "people" src = {Edwin} alt = "Edwin Zhu"></img>
         </div>
-      </div>  
+      </div>   */}
 
       </div>
     </div>
