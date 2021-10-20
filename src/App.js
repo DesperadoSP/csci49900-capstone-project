@@ -3,7 +3,7 @@ import 'devextreme/dist/css/dx.light.css';
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Footer from './components/Footer';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import Home from './pages'
 import Products from './pages/products';

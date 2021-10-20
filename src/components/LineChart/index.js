@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import ReactHighcharts from 'react-highcharts/ReactHighstock.src'
 import priceData from './data.json'
+import StockInformation from '../../pages/stockInformation';
+import axios from 'axios'; 
 import moment from 'moment'
 import './chart.css';
 import placeholder from './placeholder-wide.png';
 import CandleApp from '../CandleChart/chart';
 import CandleChart from '../CandleChart/chart';
+
+import {Home} from '../../pages/index';
 
 export default class LineChart extends Component {
 /* Controls the buttons to view either the linechart or candlestick chart */
@@ -14,7 +18,10 @@ export default class LineChart extends Component {
     this.state = {
       linechart_Visibility: "block",
       candlestick_Visibility: "none",
-      items: []
+      items: [],
+      date: [],
+      price: [],
+      stock: ""
     };
 
   }
@@ -33,6 +40,13 @@ export default class LineChart extends Component {
     })
   } 
 
+  setStock = (e) => {
+    this.setState ({
+      stock: "TSLA"
+    })
+  }
+
+
 /* -------------------------------------------- */
 
 /*
@@ -45,8 +59,22 @@ constructor() {
 }
 */
 
+/*
+getStockInfo = async () => {
+  var info = await axios.get (
+    'https://api.marketstack.com/v1/eod/latest?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock , { mode: "no-cors" }
+  )
+  .then(function(response, data) {
+    data = response.data
+  });
+   stockInfo(info.data.data); 
+  console.log(info);
+};
+*/
+
+/*
 componentDidMount() {
-  /* this.getItems(); */
+  this.getItems(); 
   fetch('https://stocknewsapi.com/api/v1?tickers=AAPL&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy')
   .then(response => response.json())
   .then(
@@ -57,6 +85,7 @@ componentDidMount() {
     }
   )
 }
+*/
 
 /*
 getItems() {

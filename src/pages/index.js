@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ReactDOM } from 'react';
 import Whirligig from 'react-whirligig'
+import Highcharts from 'highcharts/highstock';
+import HighchartsReact from 'highcharts-react-official';
 import './index.css'
 import background from './Sky.jpg';
 import DailyArticles from './dailyArticles';
 import NewsItem from './newsItem';
+import Line from './linechartv2';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
-import {Link} from 'react-router-dom';
 import StockInformation from './stockInformation';
 import axios from 'axios'; 
 
@@ -18,9 +19,49 @@ import ChartJS from '../components/CandleChart/chart';
 import dataSource from '../components/CandleChart/data'
 import CandleApp from '../components/CandleChart/chart';
 import { AxisConstantLineStyle } from 'devextreme-react/chart';
+import ReactHighcharts from 'react-highcharts';
+
+/*
+const options = {
+  title: {
+    text: 'My stock chart'
+  },
+  plotOptions: {
+    series: {
+      showInNavigator: true,
+      gapSize: 6,
+
+    }
+  },
+  rangeSelector: {
+    selected: 1
+  },
+  chart: {
+    height: '60%',
+    width: 1400,
+  },
+  credits: {
+    enabled: false
+  },
+  legend: {
+    enabled: false
+  },
+  tooltip: {
+    valueDecimals: 2
+  },
+  series: [
+    {
+      data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]
+      
+    }
+  ]
+};
+*/
   
 const Home = () => {
 
+  const [price, setPrice] = useState([]);
+  /* const [date, setDate] = useState([]); */
   const [stockInfo, setStockInfo] = useState([]);
   const [articles, setArticles] = useState([]);
   const [stock, setStock]= useState("TSLA");
@@ -61,6 +102,7 @@ const Home = () => {
       );
       setArticles(res.data.data);
       getStockInfo();
+      getchartInfo();
     };
     getArticles();
     
@@ -69,11 +111,21 @@ const Home = () => {
 
   const getStockInfo = async () => {
     const info = await axios.get (
-      'http://api.marketstack.com/v1/eod/latest?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock /*+ '&%20date_from=2021-10-15'*/ , { mode: "no-cors" }
+      'https://api.marketstack.com/v1/eod/latest?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock /*+ '&%20date_from=2021-10-15'*/ , { mode: "no-cors" }
     );
     setStockInfo(info.data.data);
     console.log(info);
   };
+
+  const getchartInfo = async () => {
+    const priceAndDate = await axios.get (
+      'https://api.marketstack.com/v1/eod?access_key=7ba49202483340bca37ab953c66b592c&symbols=AAPL'
+    );
+    setPrice(priceAndDate.data.data);
+    /* setDate(priceAndDate.data); */
+    console.log(price);
+    /* console.log(date); */
+  }
 
   const getArticles = async () => {
     const res = await axios.get(
@@ -85,7 +137,6 @@ const Home = () => {
     getStockInfo();
     /* tbappChange(); */
   };
-
 
   /* ------------------ */
 
@@ -108,6 +159,7 @@ const Home = () => {
   }, []);
 
   /*-------------*/
+  
 
   return (
     <div id='content'>
@@ -188,16 +240,128 @@ const Home = () => {
     </div>
         
     <div id='chart-div'>
-        <h1><NavLink to='/productX' id='productX-Link'> {stock} </NavLink></h1>
+        <h1> {stock} </h1>
         <div className='linechart'>
           <Chart></Chart>
+          
+              <HighchartsReact
+                highcharts={Highcharts}
+                constructorType={'stockChart'}
+                options={{
+                  yAxis: [{
+                    offset: 30,
+  
+                      x: -20,
+                      style: {
+                        "color": "#000", "position": "absolute"
+            
+                      },
+                      align: 'left'
+                    },
+  
+                  ],
+                  title: {
+                    text: ''
+                  },
+                  plotOptions: {
+                    series: {
+                      showInNavigator: true,
+                      gapSize: 6,
+                
+                    }
+                  },
+                  rangeSelector: {
+                    selected: 1
+                  },
+                  chart: {
+                    height: '60%',
+                    width: 1400,
+                  },
+                  credits: {
+                    enabled: false
+                  },
+                  legend: {
+                    enabled: false
+                  },
+                  tooltip: {
+                    valueDecimals: 2
+                  },
+                  series: [
+                    {
+                      /*data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]*/
+                      data: [0, 1, 2, 3, 4]
+                    }
+                  ]
+                }}
+                >
+                </HighchartsReact>
+
+        <div className='linechart'>
+            
+              <HighchartsReact
+              highcharts={Highcharts}
+              /*constructorType={'stockChart'}*/
+              options={{
+                yAxis: [{
+                  offset: 30,
+
+                    x: -20,
+                    style: {
+                      "color": "#000", "position": "absolute"
+          
+                    },
+                    align: 'left'
+                  },
+
+                ],
+                title: {
+                  text: ''
+                },
+                plotOptions: {
+                  series: {
+                    showInNavigator: true,
+                    gapSize: 6,
+              
+                  }
+                },
+                rangeSelector: {
+                  selected: 1
+                },
+                chart: {
+                  height: '60%',
+                  width: 1400,
+                },
+                credits: {
+                  enabled: false
+                },
+                legend: {
+                  enabled: false
+                },
+                tooltip: {
+                  valueDecimals: 2
+                },
+                series: [
+                  {
+                    type: 'line',
+                    /*data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]*/
+                    data: [price.map(({date, close}) => (
+                      date={date}, 
+                      close={close}))]
+                  }
+                ]
+              }}
+              >
+              </HighchartsReact>
+           
+        </div>   
+            
         </div>
         
       <br></br>
 
         <div id="data">
           {
-          stockInfo.map(({ close, open, high, low, volume }) => (
+          stockInfo.map(({ close, open, high, low, volume}) => (
           <StockInformation
             open={open} 
             close={close}
@@ -250,11 +414,11 @@ const Home = () => {
               <button id="sliderbutton-prev" onClick={prev}>Prev</button>
               <button id='sliderbutton-next' onClick={next}>Next</button>
             </div>
-
+    
           </div>
       </div>
     </div>
   );
 };
-  
+
 export default Home;
