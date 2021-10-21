@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Whirligig from 'react-whirligig'
-import Highcharts from 'highcharts/highstock';
+import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import './index.css'
 import background from './Sky.jpg';
@@ -15,64 +15,43 @@ import axios from 'axios';
 import Chart from '../components/LineChart/index';
 import Logo from '../components/Navbar/TradeBreath.gif';
 
+import { CanvasJSChart } from 'canvasjs-react-charts';
+
 import ChartJS from '../components/CandleChart/chart';
 import dataSource from '../components/CandleChart/data'
-import CandleApp from '../components/CandleChart/chart';
 import { AxisConstantLineStyle } from 'devextreme-react/chart';
 import ReactHighcharts from 'react-highcharts';
-
-/*
-const options = {
-  title: {
-    text: 'My stock chart'
-  },
-  plotOptions: {
-    series: {
-      showInNavigator: true,
-      gapSize: 6,
-
-    }
-  },
-  rangeSelector: {
-    selected: 1
-  },
-  chart: {
-    height: '60%',
-    width: 1400,
-  },
-  credits: {
-    enabled: false
-  },
-  legend: {
-    enabled: false
-  },
-  tooltip: {
-    valueDecimals: 2
-  },
-  series: [
-    {
-      data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]
-      
-    }
-  ]
-};
-*/
   
 const Home = () => {
 
+  const [stockName, setStockName] = useState("");
   const [price, setPrice] = useState([]);
-  /* const [date, setDate] = useState([]); */
   const [stockInfo, setStockInfo] = useState([]);
   const [articles, setArticles] = useState([]);
   const [stock, setStock]= useState("TSLA");
+
+  const [toggleLine, setLine] = useState("block");
+  const [toggleCandle, setCandle] = useState("none");
 
   /* const [block, setBlock] = useState("block") */
   const [hidden, setHidden] = useState("block");
   
   function stockChange(event){
-    setStock(event.target.value);
+    setStock(event.target.value.toUpperCase());
   } 
 
+  let viewCandle = () => {
+    setLine("none");
+    setCandle("block");
+    console.log(toggleCandle);
+  }
+
+  let viewLine = () => {
+    setLine("block");
+    setCandle("none");
+    console.log(toggleLine);
+  }
+  
 /*
   const [tbapp, settbapp]= useState("");
   const [found, setFound]= useState(false);
@@ -103,6 +82,7 @@ const Home = () => {
       setArticles(res.data.data);
       getStockInfo();
       getchartInfo();
+      setStockName(stock);
     };
     getArticles();
     
@@ -119,12 +99,10 @@ const Home = () => {
 
   const getchartInfo = async () => {
     const priceAndDate = await axios.get (
-      'https://api.marketstack.com/v1/eod?access_key=7ba49202483340bca37ab953c66b592c&symbols=AAPL'
+      'https://api.marketstack.com/v1/eod?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock , { mode: "no-cors" }
     );
     setPrice(priceAndDate.data.data);
-    /* setDate(priceAndDate.data); */
-    console.log(price);
-    /* console.log(date); */
+    console.log(priceAndDate.data);
   }
 
   const getArticles = async () => {
@@ -135,31 +113,14 @@ const Home = () => {
     setHidden("none");
     console.log(res); 
     getStockInfo();
+    getchartInfo();
+    setStockName(stock);
     /* tbappChange(); */
   };
-
-  /* ------------------ */
 
   let whirligig
   const next = () => whirligig.next()
   const prev = () => whirligig.prev()
-
-  /*-------------*/
-  /*
-  const [chartsToDisplay, setChartsToDisplay] = useState([]);
-
-  const getData = async => {
-    const charts = [];
-    charts.push(<ChartJS key = {1} data = {MadeData} />);
-    setChartsToDisplay(charts)
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  /*-------------*/
-  
 
   return (
     <div id='content'>
@@ -240,13 +201,120 @@ const Home = () => {
     </div>
         
     <div id='chart-div'>
-        <h1> {stock} </h1>
-        <div className='linechart'>
-          <Chart></Chart>
+      <div id='chart-container'>
+        <h1> {stockName} </h1>
+        <div style={{
+            display: toggleCandle,
+            marginLeft: '10%',
+            marginRight: '10%',
+            height: '25%',
+            marginTop: '2%',
+            marginBottom: '2%'
+          }}>
+        <CanvasJSChart
+          options = { {
+            theme: "light1",
+            exportEnabled: true,
+            animationEnabled: true,
+            height: 450,
+            axisY: {
+              minimum: Math.min(...price.map(data => data.low)) / 1.1,
+              maximum: Math.max(...price.map(data => data.high)) * 1.1,
+              crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+              },
+              prefix: "$",
+            },
+            axisX: {
+              crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+              },
+              scaleBreaks: {
+                spacing: 0,
+                fillOpacity: 0,
+                lineThickness: 0,
+                customBreaks: price.reduce((breaks, value, index, array) => {
+                    if (index === 0) return breaks;
+
+                    const currentDataPointUnix = Number(new Date(value.date));
+                    const previousDataPointUnix = Number(new Date(array[index - 1].date));
+
+                    const oneDayInMs = 86400000;
+
+                    const difference = previousDataPointUnix - currentDataPointUnix;
+
+                    return difference === oneDayInMs
+                        ? breaks
+                        : [
+                            ...breaks,
+                            {
+                                startValue: currentDataPointUnix,
+                                endValue: previousDataPointUnix - oneDayInMs
+                            }
+                        ]
+                  }, [])
+                }
+              },
+                data: [{
+                  type: 'candlestick',
+                  risingColor: "green",
+                  fallingColor: "#E40A0A",
+                  dataPoints: price.map(price => ({
+                      x: new Date(price.date),
+                      y: [
+                        price.open,
+                        price.high,
+                        price.low,
+                        price.close
+                    ]
+                  }))
+                }],
+          
+              }
+            }
+          />
+          </div>
+
+          <div style={{
+            display: toggleLine,
+            marginLeft: '10%',
+            marginRight: '10%',
+            height: '25%',
+            marginTop: '2%',
+            marginBottom: '2%'
+          }}>
+          {stockInfo.map(({ symbol }) => (
+                <Line
+                  symbol={symbol}
+                />
+          ))}
+          </div>
+
+          <div id='buttons'>
+          <button onClick={viewCandle}
+            id="candlesticks-button">Candlestick Chart
+          </button> 
+          <button onClick={viewLine}
+            id="line-button">Line Chart
+          </button> 
+        </div>
+
+      </div>
+    </div>
+
+      <div id='chart-div'>
+        <div id='chart-container'>
+          
+
+          <div className='linechart'>
+            
+            {/* <Chart></Chart>
           
               <HighchartsReact
                 highcharts={Highcharts}
-                constructorType={'stockChart'}
+                
                 options={{
                   yAxis: [{
                     offset: 30,
@@ -258,7 +326,6 @@ const Home = () => {
                       },
                       align: 'left'
                     },
-  
                   ],
                   title: {
                     text: ''
@@ -288,76 +355,21 @@ const Home = () => {
                   },
                   series: [
                     {
-                      /*data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]*/
-                      data: [0, 1, 2, 3, 4]
+                      
+                      data: [
+                            ['2021-10-13', 140.91],
+                            ['2021-10-14', 140.99]
+                          ]
                     }
                   ]
                 }}
                 >
-                </HighchartsReact>
-
-        <div className='linechart'>
-            
-              <HighchartsReact
-              highcharts={Highcharts}
-              /*constructorType={'stockChart'}*/
-              options={{
-                yAxis: [{
-                  offset: 30,
-
-                    x: -20,
-                    style: {
-                      "color": "#000", "position": "absolute"
-          
-                    },
-                    align: 'left'
-                  },
-
-                ],
-                title: {
-                  text: ''
-                },
-                plotOptions: {
-                  series: {
-                    showInNavigator: true,
-                    gapSize: 6,
-              
-                  }
-                },
-                rangeSelector: {
-                  selected: 1
-                },
-                chart: {
-                  height: '60%',
-                  width: 1400,
-                },
-                credits: {
-                  enabled: false
-                },
-                legend: {
-                  enabled: false
-                },
-                tooltip: {
-                  valueDecimals: 2
-                },
-                series: [
-                  {
-                    type: 'line',
-                    /*data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]*/
-                    data: [price.map(({date, close}) => (
-                      date={date}, 
-                      close={close}))]
-                  }
-                ]
-              }}
-              >
-              </HighchartsReact>
-           
-        </div>   
+              </HighchartsReact> */}
+          </div>   
             
         </div>
         
-      <br></br>
+        <br></br>
 
         <div id="data">
           {
@@ -370,27 +382,10 @@ const Home = () => {
             volume={volume}
           />
           ))}
-
-          {/*
-          {found ?
-          <div>
-            <h3> {stock} </h3>
-            <br></br>
-            <ul> 
-              <li>Previous Close: {tbapp.vw} </li>
-
-              <li>Open: {tbapp.o} </li>
-
-              <li>Volume: {tbapp.c} </li>
-
-            </ul>
-          </div>
-          : <h3> No Results </h3>}
-          */}
         </div>
 
         <div id='product-article-title'>
-          <h1>Recent News Articles: {stock} </h1>
+          <h1>Recent News Articles: {stockName} </h1>
         </div>
 
           <div id='product-article'>
@@ -414,9 +409,10 @@ const Home = () => {
               <button id="sliderbutton-prev" onClick={prev}>Prev</button>
               <button id='sliderbutton-next' onClick={next}>Next</button>
             </div>
-    
+
           </div>
       </div>
+              
     </div>
   );
 };

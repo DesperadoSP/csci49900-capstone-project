@@ -4,15 +4,17 @@ import background from './Sky.jpg';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
 import Logo from '../components/Navbar/TradeBreath.gif';
-import Chart from '../components/LineChart/index';
 import NewsItem from './newsItem';
+import Line from './linechartv2';
+import { CanvasJSChart } from 'canvasjs-react-charts';
 import StockInformation from './stockInformation';
 import axios, { Axios } from 'axios';
 import './products.css';
 
-import Navbar from '../components/Navbar';
   
 const Home = () => {
+  const [stockName, setStockName] = useState("");
+  const [price, setPrice] = useState([]);
   const [stockInfo, setStockInfo] = useState([]);
   const [articles, setArticles] = useState([]);
   const [stock, setStock]= useState("");
@@ -20,9 +22,30 @@ const Home = () => {
   const [hidden, setHidden] = useState("block");
   const [show, setShowing] = useState("none");
 
+  const [toggleLine, setLine] = useState("block");
+  const [toggleCandle, setCandle] = useState("none");
+
   function stockChange(event){
-    setStock(event.target.value);
+    setStock(event.target.value.toUpperCase());
   } 
+
+  function clickedStock(value){
+    setStock(value);
+    setStockName(stock);
+    getArticles();
+  }
+
+  let viewCandle = () => {
+    setLine("none");
+    setCandle("block");
+    console.log(toggleCandle);
+  }
+
+  let viewLine = () => {
+    setLine("block");
+    setCandle("none");
+    console.log(toggleLine);
+  }
 
   const getStockInfo = async () => {
     const info = await axios.get (
@@ -32,6 +55,14 @@ const Home = () => {
     console.log(info);
   };
 
+  const getchartInfo = async () => {
+    const priceAndDate = await axios.get (
+      'https://api.marketstack.com/v1/eod?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock , { mode: "no-cors" }
+    );
+    setPrice(priceAndDate.data.data);
+    console.log(priceAndDate.data);
+  }
+
   const getArticles = async () => {
     const res = await axios.get(
       'https://stocknewsapi.com/api/v1?tickers=' + stock + '&items=25&token=c5nrxp6lw6ftwokpjx08wkycksgzcg0rpgc4hlcy'
@@ -39,8 +70,10 @@ const Home = () => {
     setArticles(res.data.data);
     console.log(res); 
     setHidden("none");
-    setShowing("block");
+    setShowing("block"); 
     getStockInfo();
+    getchartInfo();
+    setStockName(stock);
     /* tbappChange(); */
   };
   
@@ -111,10 +144,104 @@ const Home = () => {
         <h1 style = {{
           marginLeft: '10%'
         }}> 
-          {stock} 
+          {stockName} 
         </h1>
-        <div className='linechart'>
-            <Chart></Chart>
+        <div style={{
+            display: toggleCandle,
+            marginLeft: '10%',
+            marginRight: '10%',
+            height: '25%',
+            marginTop: '2%',
+            marginBottom: '2%'
+          }}>
+        <CanvasJSChart
+          options = { {
+            theme: "light1",
+            exportEnabled: true,
+            animationEnabled: true,
+            height: 450,
+            axisY: {
+              minimum: Math.min(...price.map(data => data.low)) / 1.1,
+              maximum: Math.max(...price.map(data => data.high)) * 1.1,
+              crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+              },
+              prefix: "$",
+            },
+            axisX: {
+              crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+              },
+              scaleBreaks: {
+                spacing: 0,
+                fillOpacity: 0,
+                lineThickness: 0,
+                customBreaks: price.reduce((breaks, value, index, array) => {
+                    if (index === 0) return breaks;
+
+                    const currentDataPointUnix = Number(new Date(value.date));
+                    const previousDataPointUnix = Number(new Date(array[index - 1].date));
+
+                    const oneDayInMs = 86400000;
+
+                    const difference = previousDataPointUnix - currentDataPointUnix;
+
+                    return difference === oneDayInMs
+                        ? breaks
+                        : [
+                            ...breaks,
+                            {
+                                startValue: currentDataPointUnix,
+                                endValue: previousDataPointUnix - oneDayInMs
+                            }
+                        ]
+                  }, [])
+                }
+              },
+                data: [{
+                  type: 'candlestick',
+                  risingColor: "green",
+                  fallingColor: "#E40A0A",
+                  dataPoints: price.map(price => ({
+                      x: new Date(price.date),
+                      y: [
+                        price.open,
+                        price.high,
+                        price.low,
+                        price.close
+                    ]
+                  }))
+                }],
+          
+              }
+            }
+          />
+          </div>
+
+          <div style={{
+            display: toggleLine,
+            marginLeft: '10%',
+            marginRight: '10%',
+            height: '25%',
+            marginTop: '2%',
+            marginBottom: '2%'
+          }}>
+          {stockInfo.map(({ symbol }) => (
+                <Line
+                  symbol={symbol}
+                />
+          ))}
+          </div>
+
+          <div id='buttons'>
+          <button onClick={viewCandle}
+            id="candlesticks-button">Candlestick Chart
+          </button> 
+          <button onClick={viewLine}
+            id="line-button">Line Chart
+          </button> 
         </div>
 
         <br></br>
@@ -135,7 +262,7 @@ const Home = () => {
         <div style = {{
           marginLeft: '10%'
         }}>
-          <h1>Recent News Articles: {stock} </h1>
+          <h1>Recent News Articles: {stockName} </h1>
         </div>
 
           <div id='newsArticles'>
@@ -163,27 +290,49 @@ const Home = () => {
           </div>
         </div>
 
-      <div id='list'>
+    <div id='list'>
       <div id='products-title'>
         <h1> Products </h1>
       </div>
 
       <Form inline id="productSearchBar">
-        <FormControl type="text" placeholder="Search" id="productSearchBar" autoComplete="off"/>
-        <Button id="productSearchButton">
+        <FormControl type="text" onChange={stockChange} id="productSearchBar" autoComplete="off"/>
+        <Button id="productSearchButton" onClick={getArticles}>
           Search
         </Button>   
+        {/*}
         <FormControl type="text" placeholder="Filter" id="filterSearchBar" autoComplete="off"/>
         <Button id="productSearchButton">
           Filter
-        </Button>   
+        </Button> 
+        */}  
       </Form>
         
-        <ul> 
-          <li><NavLink to='/productX' activeStyle> <p>Product X</p> </NavLink></li>
-          <li></li>
-          <li></li>
-          <li></li>
+        <ul className='product-List'> 
+          <li><button onClick={() => clickedStock("AAPL")}><p>Apple</p></button></li>
+          <li><button onClick={() => clickedStock("AMZN")}><p>Amazon</p></button></li>
+          <li><button onClick={() => clickedStock("AMC")}><p>AMC Entertainement</p></button></li>
+          <li><button onClick={() => clickedStock("AMD")}><p>AMD</p></button></li>
+          <li><button onClick={() => clickedStock("BA")}><p>Boeing</p></button></li>
+          <li><button onClick={() => clickedStock("KO")}><p>Coca-Cola</p></button></li>
+          <li><button onClick={() => clickedStock("COIN")}><p>Coinbase</p></button></li>
+          <li><button onClick={() => clickedStock("DIS")}><p>Disney</p></button></li>
+          <li><button onClick={() => clickedStock("GME")}><p>Gamestop</p></button></li>
+          <li><button onClick={() => clickedStock("MSFT")}><p>Microsoft</p></button></li>
+          <li><button onClick={() => clickedStock("MRNA")}><p>Moderna</p></button></li>
+          <li><button onClick={() => clickedStock("NFLX")}><p>Netflix</p></button></li>
+          <li><button onClick={() => clickedStock("NKE")}><p>Nike</p></button></li>
+          <li><button onClick={() => clickedStock("NIO")}><p>NIO</p></button></li>
+          <li><button onClick={() => clickedStock("NVDA")}><p>NVDIA</p></button></li>
+          <li><button onClick={() => clickedStock("RYCEY")}><p>Rolls-Royce</p></button></li>
+          <li><button onClick={() => clickedStock("LUV")}><p>Southwest Airlines</p></button></li>
+          <li><button onClick={() => clickedStock("SONY")}><p>Sony</p></button></li>
+          <li><button onClick={() => clickedStock("SBUX")}><p>Starbucks</p></button></li>
+          <li><button onClick={() => clickedStock("TSLA")}><p>Tesla</p></button></li>
+          <li><button onClick={() => clickedStock("TWTR")}><p>Twitter</p></button></li>
+          <li><button onClick={() => clickedStock("UBER")}><p>Uber</p></button></li>
+          <li><button onClick={() => clickedStock("WMT")}><p>Walmart</p></button></li>
+          <li><button onClick={() => clickedStock("ZM")}><p>Zoom</p></button></li>
         </ul>
       </div>
     </div>

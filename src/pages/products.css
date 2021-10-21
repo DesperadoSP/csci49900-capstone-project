@@ -5,6 +5,7 @@
     height: 950px;
     border-style: solid;
     border-width: 1px;
+    height: 100%;
 }
 
 #products-title h1{
@@ -50,9 +51,26 @@
 }
 
 #list li p:hover {
-    color: #0000FF;
+    color: #821ce2;
 }
 
 .Title {
     padding-left: 10px;
 }
+
+.product-List li button{
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+}
+
+  .product-List {
+    margin-left: 1%;
+  }
+
+  .product-List li button p{
+    margin-top: 0%;
+    font-weight: bold;
+    font-size: 22.5px;
+  }

@@ -7,6 +7,7 @@ import Logo from '../components/Navbar/TradeBreath.gif';
 import Chart from '../components/LineChart/index';
 import NewsItem from './newsItem';
 import StockInformation from './stockInformation';
+import Line from './linechartv2';
 import axios, { Axios } from 'axios';
 import './about.css';
 import Adrian from './Adrian.png'
@@ -14,21 +15,40 @@ import Alex from './Alex.png'
 import Diego from './Diego.png'
 import Edwin from './Edwin.png'
 
+import { CanvasJSChart } from 'canvasjs-react-charts';
+
 import StockPic from './stock.jpeg'
 import HunterPic from './hunter.jpg'
 
 const About = () => {
 
+  const [stockName, setStockName] = useState("");
+  const [price, setPrice] = useState([]);
   const [stockInfo, setStockInfo] = useState([]);
   const [articles, setArticles] = useState([]);
   const [stock, setStock]= useState("");
+
+  const [toggleLine, setLine] = useState("block");
+  const [toggleCandle, setCandle] = useState("none");
 
   const [hidden, setHidden] = useState("block");
   const [show, setShowing] = useState("none");
 
   function stockChange(event){
-    setStock(event.target.value);
+    setStock(event.target.value.toUpperCase());
   } 
+
+  let viewCandle = () => {
+    setLine("none");
+    setCandle("block");
+    console.log(toggleCandle);
+  }
+
+  let viewLine = () => {
+    setLine("block");
+    setCandle("none");
+    console.log(toggleLine);
+  }
 
   const getStockInfo = async () => {
     const info = await axios.get (
@@ -37,6 +57,14 @@ const About = () => {
     setStockInfo(info.data.data);
     console.log(info);
   };
+
+  const getchartInfo = async () => {
+    const priceAndDate = await axios.get (
+      'https://api.marketstack.com/v1/eod?access_key=7ba49202483340bca37ab953c66b592c&symbols=' + stock , { mode: "no-cors" }
+    );
+    setPrice(priceAndDate.data.data);
+    console.log(priceAndDate.data);
+  }
 
   const getArticles = async () => {
     const res = await axios.get(
@@ -47,6 +75,8 @@ const About = () => {
     setHidden("none");
     setShowing("block");
     getStockInfo();
+    getchartInfo();
+    setStockName(stock);
     /* tbappChange(); */
   };
   
@@ -116,10 +146,104 @@ const About = () => {
         <h1 style = {{
           marginLeft: '10%'
         }}> 
-          {stock} 
+          {stockName} 
         </h1>
-        <div className='linechart'>
-            <Chart></Chart>
+        <div style={{
+            display: toggleCandle,
+            marginLeft: '10%',
+            marginRight: '10%',
+            height: '25%',
+            marginTop: '2%',
+            marginBottom: '2%'
+          }}>
+        <CanvasJSChart
+          options = { {
+            theme: "light1",
+            exportEnabled: true,
+            animationEnabled: true,
+            height: 450,
+            axisY: {
+              minimum: Math.min(...price.map(data => data.low)) / 1.1,
+              maximum: Math.max(...price.map(data => data.high)) * 1.1,
+              crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+              },
+              prefix: "$",
+            },
+            axisX: {
+              crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+              },
+              scaleBreaks: {
+                spacing: 0,
+                fillOpacity: 0,
+                lineThickness: 0,
+                customBreaks: price.reduce((breaks, value, index, array) => {
+                    if (index === 0) return breaks;
+
+                    const currentDataPointUnix = Number(new Date(value.date));
+                    const previousDataPointUnix = Number(new Date(array[index - 1].date));
+
+                    const oneDayInMs = 86400000;
+
+                    const difference = previousDataPointUnix - currentDataPointUnix;
+
+                    return difference === oneDayInMs
+                        ? breaks
+                        : [
+                            ...breaks,
+                            {
+                                startValue: currentDataPointUnix,
+                                endValue: previousDataPointUnix - oneDayInMs
+                            }
+                        ]
+                  }, [])
+                }
+              },
+                data: [{
+                  type: 'candlestick',
+                  risingColor: "green",
+                  fallingColor: "#E40A0A",
+                  dataPoints: price.map(price => ({
+                      x: new Date(price.date),
+                      y: [
+                        price.open,
+                        price.high,
+                        price.low,
+                        price.close
+                    ]
+                  }))
+                }],
+          
+              }
+            }
+          />
+          </div>
+
+          <div style={{
+            display: toggleLine,
+            marginLeft: '10%',
+            marginRight: '10%',
+            height: '25%',
+            marginTop: '2%',
+            marginBottom: '2%'
+          }}>
+          {stockInfo.map(({ symbol }) => (
+                <Line
+                  symbol={symbol}
+                />
+          ))}
+          </div>
+
+          <div id='buttons'>
+          <button onClick={viewCandle}
+            id="candlesticks-button">Candlestick Chart
+          </button> 
+          <button onClick={viewLine}
+            id="line-button">Line Chart
+          </button> 
         </div>
 
         <br></br>
@@ -140,7 +264,7 @@ const About = () => {
         <div style = {{
           marginLeft: '10%'
         }}>
-          <h1>Recent News Articles: {stock} </h1>
+          <h1>Recent News Articles: {stockName} </h1>
         </div>
 
           <div id='newsArticles'>
