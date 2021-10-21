@@ -115,7 +115,7 @@ const Home = () => {
 
         <Form inline id="searchBar">
           <FormControl type="text" autoComplete="off"
-            id="searchBar"
+            id="searchBar" placeholder="Use Stock Codes (e.g. AAPL)"
             onChange={stockChange} 
         />
 
@@ -296,7 +296,8 @@ const Home = () => {
       </div>
 
       <Form inline id="productSearchBar">
-        <FormControl type="text" onChange={stockChange} id="productSearchBar" autoComplete="off"/>
+        <FormControl type="text" onChange={stockChange} id="productSearchBar" 
+        autoComplete="off" placeholder="Use Stock Codes (e.g. AAPL)"/>
         <Button id="productSearchButton" onClick={getArticles}>
           Search
         </Button>   

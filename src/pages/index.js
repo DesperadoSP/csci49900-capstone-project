@@ -161,7 +161,7 @@ const Home = () => {
 
           <Form inline id="searchBar">
               <FormControl type="text" autoComplete="off"
-              id="searchBar"
+              id="searchBar" placeholder="Use Stock Codes (e.g. AAPL)"
               /* value={inputValue} */
                onChange={stockChange} 
           />
