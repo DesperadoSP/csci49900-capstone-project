@@ -12,13 +12,10 @@ import { Form, FormControl, Button } from "react-bootstrap";
 import StockInformation from './stockInformation';
 import axios from 'axios'; 
 
-import Chart from '../components/LineChart/index';
 import Logo from '../components/Navbar/TradeBreath.gif';
 
 import { CanvasJSChart } from 'canvasjs-react-charts';
 
-import ChartJS from '../components/CandleChart/chart';
-import dataSource from '../components/CandleChart/data'
 import { AxisConstantLineStyle } from 'devextreme-react/chart';
 import ReactHighcharts from 'react-highcharts';
   
@@ -310,7 +307,7 @@ const Home = () => {
 
           <div className='linechart'>
             
-            {/* <Chart></Chart>
+            {/* 
           
               <HighchartsReact
                 highcharts={Highcharts}

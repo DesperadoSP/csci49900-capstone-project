@@ -4,7 +4,6 @@ import background from './Sky.jpg';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
 import Logo from '../components/Navbar/TradeBreath.gif';
-import Chart from '../components/LineChart/index';
 import NewsItem from './newsItem';
 import StockInformation from './stockInformation';
 import Line from './linechartv2';

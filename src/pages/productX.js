@@ -9,7 +9,6 @@ import axios, { Axios } from 'axios';
 import { Nav, NavLink, NavMenu} from '../components/Navbar/NavbarElements';
 import { Form, FormControl, Button } from "react-bootstrap";
 import Logo from '../components/Navbar/TradeBreath.gif';
-import Chart from '../components/LineChart/index';
 import { render } from '@testing-library/react';
 import StockInfo from './stockInformation';
 
@@ -128,9 +127,7 @@ const Home = () => {
         </div>
         <div id='chart-div'>
             <h1> {stock} </h1>
-            <div className='linechart'>
-                <Chart></Chart>
-            </div>
+            
 
         <br></br>
 
